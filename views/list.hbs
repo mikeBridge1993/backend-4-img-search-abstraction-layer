@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    {{> header}}
+    <body>
+        <div class="container main">
+            <div class="row text-center">
+               <div class="jumbotron text-center mb-0 pb-2" style="width:100%; border-radius:0%;">
+                    <h1 class="display-3 text-center">Image Search is now simpler!</h1>
+                    <hr class="my-4">
+                    <p class="lead">Please enter the search items below</p>
+                    <p class="lead"></p>
+                    <form class="form-signin" id="form">
+                        <div class="input-group col-10 offset-1">
+                            <input type="text" class="form-control col-6 mx-2" id="search-par" placeholder="Search for...">
+                            <input type="text" class="form-control mx-2 " id="search-offset" placeholder="Number of results... (10 is the maximum value)">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary btn-lg" type="submit">Go!</button>
+                                <button class="btn btn-success btn-lg" onclick="location.href='/list'; return false;" type="btn">Search List</button>
+                            </span>
+                        </div>
+                    </form>
+                    <hr class="mt-4">
+                </div>
+            </div>
+            <div class="row text-center" style="background-color:#e9ecef">
+            <ul class="list-unstyled mx-auto ">
+             {{#each listObject}}
+              <li class="media mt-2 pt-2">
+                 <a href="{{this.imgLink}}" class="ml-3">
+                    <img class="d-flex mr-3 img-rounded shadow" src="{{this.searchImage}}" alt="Generic placeholder image">
+                  </a>
+                  <div class="media-body  text-left my-auto">
+                      <h5 class="lead my-1 py-0 text-primary">{{this.search}}</h5><br>
+                      <p class="lead my-1 py-0"><small>{{this.when}}</small></p><br>
+                  </div>
+              </li>
+              <hr class="my-3">
+            {{/each}}
+            </ul>
+            </div>
+        </div>
+        <script>
+        document.getElementById("form").onsubmit = function() {
+            var offset =  document.getElementById('search-offset').value;
+            if(!offset || offset > 10 || isNaN(offset)){
+                offset = 10;
+            }
+
+            location.href='/' + document.getElementById('search-par').value +'?offset=' + offset; 
+            return false;
+        };
+        </script>
+    </body>
+    {{> footer}}
+</html>
