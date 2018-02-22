@@ -9,8 +9,6 @@ hbs.registerPartials(__dirname + '/views/partials');
 
 const port = process.env.PORT || 3000;
 
-const type = "https://quiet-hollows-81269.herokuapp.com/" || "http://localhost:3000/";
-
 var app = express();
 app.use(express.static('public'));
 app.set('view engine', hbs);
@@ -40,10 +38,6 @@ app.get('/list', (req, res) => {
 
 app.get('/:search', (req, res) => {
     
-  
-    
-    
-    console.log(req.query.offset);
     var url = 'https://www.googleapis.com/customsearch/v1?q=' + encodeURIComponent(req.params.search) + '&cx=016277566272038559019:uuh7p6hteq8&num='+ req.query.offset + '&&searchType=image&key=AIzaSyBQU1ZNQG9JxU2Ffs1YsMCZwCAfIjbxhKc';
 
     axios.get(url)
